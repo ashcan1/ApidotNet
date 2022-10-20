@@ -12,8 +12,8 @@ using StudentAdmin.DataModel;
 namespace StudentAdmin.Migrations
 {
     [DbContext(typeof(StudentAdminContext))]
-    [Migration("20221019101139_oneto")]
-    partial class oneto
+    [Migration("20221020101510_newone2")]
+    partial class newone2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,11 +86,10 @@ namespace StudentAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Mobile")
-                        .HasColumnType("int");
+                    b.Property<long>("Mobile")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ProfileImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
