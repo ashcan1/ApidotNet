@@ -2,8 +2,10 @@
 
 namespace StudentAdmin.Repository
 {
-    public interface IstudentRepository
+    public interface IStudentRepository
     {
-        List<Student> GetStudents();
+        Task<List<Student>>GetStudents();
+      
+
     }
 }

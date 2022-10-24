@@ -6,18 +6,20 @@ namespace StudentAdmin.Controllers
     [ApiController]
     public class Student : Controller
     {
-        private readonly IstudentRepository studentRepository;
+        private readonly IStudentRepository studentRepository;
 
-        public Student(IstudentRepository studentRepository)
+        public Student(IStudentRepository studentRepository)
         {
             this.studentRepository = studentRepository;
         }
 
         [HttpGet]
         [Route("[controller]")]
-        public IActionResult GetAllStudent()
+        public async Task<IActionResult> GetAllStudent()
         {
             return Ok (studentRepository.GetStudents());
         }
+
+
     }
 }
