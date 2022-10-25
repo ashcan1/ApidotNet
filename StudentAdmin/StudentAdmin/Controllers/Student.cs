@@ -17,7 +17,7 @@ namespace StudentAdmin.Controllers
         [Route("[controller]")]
         public async Task<IActionResult> GetAllStudent()
         {
-            return Ok (studentRepository.GetStudents());
+            return Ok(await studentRepository.GetStudents());
         }
 
 
