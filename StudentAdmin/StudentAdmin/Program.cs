@@ -4,7 +4,7 @@ using StudentAdmin.DataModel;
 using StudentAdmin.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
 // Add services to the container.
 
@@ -14,18 +14,18 @@ builder.Services.AddDbContext<StudentAdminContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudentAdminPortalDb"));
 });
- builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://localhost:4200/")
-                          .AllowAnyHeader()
-                          .WithMethods("GET", "POST", "PUT", "DELETE")
-                          .WithExposedHeaders("*");
-                          
-                      });
-});
+
+    builder.Services.AddCors((options) =>
+ {
+     options.AddPolicy("AngularAppilication", (builder) =>
+     {
+                            builder.WithOrigins("http://localhost:4200")
+                           .AllowAnyHeader()
+                           .WithMethods("GET", "POST", "PUT", "DELETE")
+                           .WithExposedHeaders("*");
+
+                       });
+     });
 
 
 builder.Services.AddScoped<IStudentRepository, SqlStudentRepository>();
@@ -42,7 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors("AngularAppilication");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
