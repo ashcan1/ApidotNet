@@ -19,7 +19,16 @@ namespace StudentAdmin.Repository
 
         public async Task<List<Student>> GetStudents()
         {
-            return await _context.Student.Include(nameof(Gender)).Include(nameof(Address)).ToListAsync();
+            return await _context.Student.Include(nameof(Gender))
+                .Include(nameof(Address)).ToListAsync();
+        }
+
+        public async Task<Student> GetStudentById(Guid Id)
+        {
+            return await _context.Student
+                  .Include(nameof(Gender))
+                  .Include(nameof(Address))
+                  .FirstOrDefaultAsync(x => x.Id == Id);
         }
     }
 }

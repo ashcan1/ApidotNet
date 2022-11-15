@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentAdmin.Model;
 using StudentAdmin.Repository;
 
 namespace StudentAdmin.Controllers
@@ -19,6 +20,24 @@ namespace StudentAdmin.Controllers
         {
             return Ok(await studentRepository.GetStudents());
         }
+
+
+        [HttpGet]
+
+        [Route("[controller]/{Id:guid}")]
+        public async Task<IActionResult> GetStudentsById([FromRoute]Guid Id)
+        {
+            // fetch student details
+        var student = await studentRepository.GetStudentById(Id);
+
+            // Return student
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return Ok(student);
+        }
+
 
 
     }
