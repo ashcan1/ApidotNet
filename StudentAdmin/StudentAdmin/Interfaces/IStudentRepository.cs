@@ -6,6 +6,9 @@ namespace StudentAdmin.Repository
     {
         Task<List<Student>>GetStudents();
         Task<Student> GetStudentById(Guid Id);
-      
+        Task<List<Gender>> GetGender();
+
+
+
     }
 }

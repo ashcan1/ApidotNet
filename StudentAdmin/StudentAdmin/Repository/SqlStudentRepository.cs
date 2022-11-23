@@ -30,6 +30,14 @@ namespace StudentAdmin.Repository
                   .Include(nameof(Address))
                   .FirstOrDefaultAsync(x => x.Id == Id);
         }
+
+        public async Task<List<Gender>> GetGender()
+        {
+            return await _context.Gender.ToListAsync();
+                
+
+
+        }
     }
 }
     

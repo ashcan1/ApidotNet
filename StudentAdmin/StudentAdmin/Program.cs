@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-var connString = builder.Configuration.GetConnectionString("StudentAdminPortalDb");
+
 builder.Services.AddDbContext<StudentAdminContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudentAdminPortalDb"));
