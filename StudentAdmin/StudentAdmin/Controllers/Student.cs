@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentAdmin.DataModel;
 using StudentAdmin.Model;
 using StudentAdmin.Repository;
 
@@ -36,6 +37,26 @@ namespace StudentAdmin.Controllers
                 return NotFound();
             }
             return Ok(student);
+        }
+
+        [HttpPut]
+        [Route("[controller]/{Id:guid}")]
+
+        public async Task<IActionResult> UpdateStudents([FromRoute] Guid Id, [FromBody] UpdateStudentRequest re)
+        {
+            // see if the student exisit
+            if (await studentRepository.Exists(Id))
+            {
+                //update Details
+                var updatedStudents = await studentRepository.UpdateStudent(Id,re);
+                return Ok(updatedStudents);
+            
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
 

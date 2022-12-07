@@ -1,4 +1,6 @@
-﻿using StudentAdmin.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using StudentAdmin.DataModel;
+using StudentAdmin.Model;
 
 namespace StudentAdmin.Repository
 {
@@ -7,7 +9,8 @@ namespace StudentAdmin.Repository
         Task<List<Student>>GetStudents();
         Task<Student> GetStudentById(Guid Id);
         Task<List<Gender>> GetGender();
-
+        Task<bool>Exists(Guid Id);
+        Task<Student> UpdateStudent(Guid Id, UpdateStudentRequest re);
 
 
     }
