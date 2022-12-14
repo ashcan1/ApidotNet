@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dependency_injection
 {
-    internal class EmployeeDAL : IEmployeeDAL
+    public class EmployeeDAL : IEmployeeDAL
     {
         public List<EmployeeModel> SelectAllEmployees()
         {

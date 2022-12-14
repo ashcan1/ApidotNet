@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dependency_injection
 {
-    internal class EmployeeModel
+    public class EmployeeModel
     {
         public int ID { get; set; }
         public string Name { get; set; }

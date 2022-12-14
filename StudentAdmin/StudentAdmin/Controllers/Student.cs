@@ -26,10 +26,10 @@ namespace StudentAdmin.Controllers
         [HttpGet]
 
         [Route("[controller]/{Id:guid}")]
-        public async Task<IActionResult> GetStudentsById([FromRoute]Guid Id)
+        public async Task<IActionResult> GetStudentsById([FromRoute] Guid Id)
         {
             // fetch student details
-        var student = await studentRepository.GetStudentById(Id);
+            var student = await studentRepository.GetStudentById(Id);
 
             // Return student
             if (student == null)
@@ -47,10 +47,10 @@ namespace StudentAdmin.Controllers
             // see if the student exisit
             if (await studentRepository.Exists(Id))
             {
-                //update Details
-                var updatedStudents = await studentRepository.UpdateStudent(Id,re);
+                // update Details
+                var updatedStudents = await studentRepository.UpdateStudent(Id, re);
                 return Ok(updatedStudents);
-            
+
             }
             else
             {
@@ -58,8 +58,30 @@ namespace StudentAdmin.Controllers
             }
 
         }
+        [HttpDelete]
+        [Route("[controller]/{Id:guid}")]
+
+        public async Task<IActionResult> DeleteStudents([FromRoute] Guid Id)
+        {
+            if (await studentRepository.Exists(Id))
+            {
+                var students = await studentRepository.DeleteStudent(Id);
+
+                return Ok(students);
+
+            }
+            return NotFound();  
 
 
+
+          
+ 
+        }
 
     }
 }
+
+
+
+    
+

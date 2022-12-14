@@ -70,6 +70,28 @@ namespace StudentAdmin.Repository
             return null;
 
         }
+
+        public async Task<Student>DeleteStudent(Guid Id)
+        {
+
+            var students  = await  GetStudentById(Id);
+            if (students  != null)
+            {
+               _context.Student.Remove(students);
+                _context.SaveChanges();
+            }
+
+            return null;
+
+       
+
+
+
+
+
+
+        }
+
     }
 }
     
