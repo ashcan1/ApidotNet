@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ICSharpCode.Decompiler.CSharp.Resolver;
+using Microsoft.AspNetCore.Mvc;
 using StudentAdmin.DataModel;
 using StudentAdmin.Model;
 using StudentAdmin.Repository;
@@ -17,9 +18,9 @@ namespace StudentAdmin.Controllers
 
         [HttpGet]
         [Route("[controller]")]
-        public async Task<IActionResult> GetAllStudent()
+        public async Task <IActionResult> GetAllStudent()
         {
-            return Ok(await studentRepository.GetStudents());
+            return Ok(studentRepository.GetStudents());
         }
 
 
@@ -77,6 +78,14 @@ namespace StudentAdmin.Controllers
           
  
         }
+        [HttpPost]
+        [Route("[controller]/Id")]
+        public async Task<IActionResult> AddStudents ([FromBody] AddStudent re)
+        {
+            var newStudent = await studentRepository.AddNewStudent(re);
+           
+            
+        } 
 
     }
 }

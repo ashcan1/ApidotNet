@@ -28,7 +28,7 @@ builder.Services.AddDbContext<StudentAdminContext>(options =>
      });
 
 
-builder.Services.AddScoped<IStudentRepository, SqlStudentRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

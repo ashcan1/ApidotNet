@@ -5,10 +5,10 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace StudentAdmin.Repository
 {
-    public class SqlStudentRepository : IStudentRepository
+    public class StudentRepository : IStudentRepository
     {
         private readonly StudentAdminContext _context;
-        public SqlStudentRepository(StudentAdminContext context)
+        public StudentRepository(StudentAdminContext context)
         {
             this._context = context;
 
@@ -31,11 +31,11 @@ namespace StudentAdmin.Repository
                   .FirstOrDefaultAsync(x => x.Id == Id);
         }
 
+
+
         public async Task<List<Gender>> GetGender()
         {
             return await _context.Gender.ToListAsync();
-
-
 
         }
 
@@ -43,6 +43,9 @@ namespace StudentAdmin.Repository
         {
             return await _context.Student.AnyAsync(x => x.Id == Id);
         }
+
+
+
 
         public async Task<Student>UpdateStudent(Guid Id, UpdateStudentRequest re)
         {
@@ -71,6 +74,9 @@ namespace StudentAdmin.Repository
 
         }
 
+
+
+
         public async Task<Student>DeleteStudent(Guid Id)
         {
 
@@ -87,6 +93,23 @@ namespace StudentAdmin.Repository
 
 
 
+
+
+
+        }
+
+        // adding student logic 
+
+
+
+        public async Task<Student> AddNewStudent(Student request)
+        {
+            // create student
+
+           var student =  await _context.Student.AddAsync(request);
+            await _context.SaveChangesAsync();
+            return student.Entity;
+ 
 
 
 
