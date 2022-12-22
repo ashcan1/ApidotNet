@@ -15,7 +15,7 @@ namespace StudentAdmin.Repository
         Task<Student> DeleteStudent(Guid Id);
 
         Task<AddStudent> AddNewStudent(Student addStudent);
-        T
+        
     }
 }
 
