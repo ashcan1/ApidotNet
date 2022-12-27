@@ -7,15 +7,17 @@ namespace StudentAdmin.Repository
 {
     public interface IStudentRepository
     {
-        Task<List<Student>>GetStudents();
-        Task<Student> GetStudentById(Guid Id);
+        Task<List<Students>>GetStudents();
+        Task<Students> GetStudentById(Guid Id);
         Task<List<Gender>> GetGender();
         Task<bool>Exists(Guid Id);
-        Task<Student> UpdateStudent(Guid Id, UpdateStudentRequest re);
-        Task<Student> DeleteStudent(Guid Id);
+        Task<Students> UpdateStudent(Guid Id, UpdateStudentRequest re);
+        Task<Students> DeleteStudent(Guid Id);
 
-        Task<AddStudent> AddNewStudent(Student addStudent);
-        
+
+      //  Task<Students> AddNewStudent(AddStudent request);
+
+
     }
 }
 

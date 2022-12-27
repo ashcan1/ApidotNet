@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using StudentAdmin.DataModel;
 using StudentAdmin.Repository;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+ 
 
 builder.Services.AddDbContext<StudentAdminContext>(options =>
 {
@@ -22,10 +24,13 @@ builder.Services.AddDbContext<StudentAdminContext>(options =>
                             builder.WithOrigins("http://localhost:4200")
                            .AllowAnyHeader()
                            .WithMethods("GET", "POST", "PUT", "DELETE")
-                           .WithExposedHeaders("*");
-
-                       });
+         .WithExposedHeaders("*");
      });
+ });
+
+
+
+
 
 
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
@@ -33,6 +38,7 @@ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddAutoMapper(typeof(StartupBase).Assembly);
 
 var app = builder.Build();
 

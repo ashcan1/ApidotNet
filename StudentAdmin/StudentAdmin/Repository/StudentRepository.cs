@@ -17,13 +17,14 @@ namespace StudentAdmin.Repository
         //Students and navigition properties  
 
 
-        public async Task<List<Student>> GetStudents()
+        public async Task<List<Students>> GetStudents()
         {
+
             return await _context.Student.Include(nameof(Gender))
                 .Include(nameof(Address)).ToListAsync();
         }
 
-        public async Task<Student> GetStudentById(Guid Id)
+        public async Task<Students> GetStudentById(Guid Id)
         {
             return await _context.Student
                   .Include(nameof(Gender))
@@ -47,7 +48,7 @@ namespace StudentAdmin.Repository
 
 
 
-        public async Task<Student>UpdateStudent(Guid Id, UpdateStudentRequest re)
+        public async Task<Students>UpdateStudent(Guid Id, UpdateStudentRequest re)
         {
            var existingStudents =  await GetStudentById(Id);
 
@@ -77,7 +78,7 @@ namespace StudentAdmin.Repository
 
 
 
-        public async Task<Student>DeleteStudent(Guid Id)
+        public async Task<Students>DeleteStudent(Guid Id)
         {
 
             var students  = await  GetStudentById(Id);
@@ -102,18 +103,38 @@ namespace StudentAdmin.Repository
 
 
 
-        public async Task<Student> AddNewStudent(Student request)
-        {
-            // create student
+        //public async Task<Students> AddNewStudent(AddStudent request)
+        //{
+        //    // create student
+        //    var test = new Students();
+        //    {
+        //        test.Id = Guid.NewGuid();
+        //        test.FirstName = request.FirstName;
+        //        test.LastName = request.LastName;
+        //        test.DateOfBirth = request.DateOfBirth;
+        //        test.Email = request.Email;
+        //        test.Mobile = request.Mobile;
+        //        test.Address = request.Address;
 
-           var student =  await _context.Student.AddAsync(request);
-            await _context.SaveChangesAsync();
-            return student.Entity;
+
+
+        //    }
+     
+
+
+
+        
+   
+        //    await _context.SaveChangesAsync();
+
+
+
+        //    return test;
  
 
 
 
-        }
+        //}
 
     }
 }

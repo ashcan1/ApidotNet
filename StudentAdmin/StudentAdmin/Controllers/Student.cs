@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp.Resolver;
+﻿using AutoMapper;
+using ICSharpCode.Decompiler.CSharp.Resolver;
 using Microsoft.AspNetCore.Mvc;
 using StudentAdmin.DataModel;
 using StudentAdmin.Model;
@@ -10,15 +11,17 @@ namespace StudentAdmin.Controllers
     public class Student : Controller
     {
         private readonly IStudentRepository studentRepository;
+        //private readonly IMapper mapper;
 
         public Student(IStudentRepository studentRepository)
         {
             this.studentRepository = studentRepository;
+           // this.mapper = mapper;
         }
 
         [HttpGet]
         [Route("[controller]")]
-        public async Task <IActionResult> GetAllStudent()
+        public async Task<IActionResult> GetAllStudent()
         {
             return Ok(studentRepository.GetStudents());
         }
@@ -71,26 +74,29 @@ namespace StudentAdmin.Controllers
                 return Ok(students);
 
             }
-            return NotFound();  
+            return NotFound();
 
 
 
-          
- 
+
+
         }
-        [HttpPost]
-        [Route("[controller]/Id")]
-        public async Task<IActionResult> AddStudents ([FromBody] AddStudent re)
-        {
-            var newStudent = await studentRepository.AddNewStudent(re);
-           
-            
-        } 
+
+        //[HttpPost]
+        //[Route("[controller]/Add")]
+        //public async Task<IActionResult> AddStudetAsync([FromBody] AddStudent re)
+        //{
+        //    var newStudent = await studentRepository.AddNewStudent(re);
+        //    return Ok(newStudent);
+
+
+
+        //}
 
     }
 }
 
 
 
-    
+
 

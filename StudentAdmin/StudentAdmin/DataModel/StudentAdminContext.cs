@@ -10,7 +10,7 @@ namespace StudentAdmin.DataModel
 
         }
         // when we run ef core migration will create tables on sql server
-        public DbSet <Student> Student { get; set; }
+        public DbSet <Students> Student { get; set; }
         public DbSet <Gender> Gender { get; set; }
          
         public  DbSet<Address> Address { get; set; }

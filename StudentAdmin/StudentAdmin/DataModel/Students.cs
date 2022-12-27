@@ -1,8 +1,7 @@
-﻿using System.Numerics;
-
+﻿
 namespace StudentAdmin.Model
 {
-    public class Student
+    public class Students
     {
 
         public Guid Id { get; set; }
