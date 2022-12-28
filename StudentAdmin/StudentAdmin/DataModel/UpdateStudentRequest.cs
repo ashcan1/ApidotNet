@@ -1,9 +1,11 @@
-﻿using StudentAdmin.Model;
+﻿using StudentAdmin.DataModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentAdmin.DataModel
 {
     public class UpdateStudentRequest
     {
+     
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -1,9 +1,13 @@
 ﻿
-namespace StudentAdmin.Model
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace StudentAdmin.DataModel
 {
-    public class Students
+    public class student
     {
 
+       
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -14,8 +18,8 @@ namespace StudentAdmin.Model
         public string? ProfileImageUrl { get; set; }
         public Guid GenderId { get; set; }
         // navigation properties 
-        public Gender Gender { get; set; }
-        public Address Address { get; set; }
+        public Gender? Gender { get; set; }
+        public Address? Address { get; set; }
     
     }
 }

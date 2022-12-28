@@ -2,7 +2,7 @@
 using ICSharpCode.Decompiler.CSharp.Resolver;
 using Microsoft.AspNetCore.Mvc;
 using StudentAdmin.DataModel;
-using StudentAdmin.Model;
+
 using StudentAdmin.Repository;
 
 namespace StudentAdmin.Controllers
@@ -23,14 +23,14 @@ namespace StudentAdmin.Controllers
         [Route("[controller]")]
         public async Task<IActionResult> GetAllStudent()
         {
-            return Ok(studentRepository.GetStudents());
+            return  Ok(await studentRepository.Getstudent());
         }
 
 
         [HttpGet]
 
         [Route("[controller]/{Id:guid}")]
-        public async Task<IActionResult> GetStudentsById([FromRoute] Guid Id)
+        public async Task<IActionResult> GetstudentById([FromRoute] Guid Id)
         {
             // fetch student details
             var student = await studentRepository.GetStudentById(Id);
@@ -46,14 +46,14 @@ namespace StudentAdmin.Controllers
         [HttpPut]
         [Route("[controller]/{Id:guid}")]
 
-        public async Task<IActionResult> UpdateStudents([FromRoute] Guid Id, [FromBody] UpdateStudentRequest re)
+        public async Task<IActionResult> Updatestudent([FromRoute] Guid Id, [FromBody] UpdateStudentRequest re)
         {
             // see if the student exisit
             if (await studentRepository.Exists(Id))
             {
                 // update Details
-                var updatedStudents = await studentRepository.UpdateStudent(Id, re);
-                return Ok(updatedStudents);
+                var updatedstudent = await studentRepository.UpdateStudent(Id, re);
+                return Ok(updatedstudent);
 
             }
             else
@@ -65,13 +65,13 @@ namespace StudentAdmin.Controllers
         [HttpDelete]
         [Route("[controller]/{Id:guid}")]
 
-        public async Task<IActionResult> DeleteStudents([FromRoute] Guid Id)
+        public async Task<IActionResult> Deletestudent([FromRoute] Guid Id)
         {
             if (await studentRepository.Exists(Id))
             {
-                var students = await studentRepository.DeleteStudent(Id);
+                var student = await studentRepository.DeleteStudent(Id);
 
-                return Ok(students);
+                return Ok(student);
 
             }
             return NotFound();
@@ -82,16 +82,16 @@ namespace StudentAdmin.Controllers
 
         }
 
-        //[HttpPost]
-        //[Route("[controller]/Add")]
-        //public async Task<IActionResult> AddStudetAsync([FromBody] AddStudent re)
-        //{
-        //    var newStudent = await studentRepository.AddNewStudent(re);
-        //    return Ok(newStudent);
+        [HttpPost]
+        [Route("[controller]/Add")]
+        public async Task<IActionResult> AddStudetAsync([FromBody] AddStudent re)
+        {
+            var newStudent = await studentRepository.AddNewStudent(re);
+            return Ok(newStudent);
 
 
 
-        //}
+        }
 
     }
 }

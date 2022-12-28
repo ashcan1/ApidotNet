@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentAdmin.DataModel;
-using StudentAdmin.Model;
-using System.Reflection.Metadata.Ecma335;
+
+
 
 namespace StudentAdmin.Repository
 {
@@ -14,17 +14,17 @@ namespace StudentAdmin.Repository
 
         }
 
-        //Students and navigition properties  
+        //student and navigition properties  
 
 
-        public async Task<List<Students>> GetStudents()
+        public async Task<List<student>> Getstudent()
         {
 
             return await _context.Student.Include(nameof(Gender))
                 .Include(nameof(Address)).ToListAsync();
         }
 
-        public async Task<Students> GetStudentById(Guid Id)
+        public async Task<student> GetStudentById(Guid Id)
         {
             return await _context.Student
                   .Include(nameof(Gender))
@@ -48,23 +48,23 @@ namespace StudentAdmin.Repository
 
 
 
-        public async Task<Students>UpdateStudent(Guid Id, UpdateStudentRequest re)
+        public async Task<student>UpdateStudent(Guid Id, UpdateStudentRequest re)
         {
-           var existingStudents =  await GetStudentById(Id);
+           var existingstudent =  await GetStudentById(Id);
 
-            if (existingStudents != null)
+            if (existingstudent != null)
             {
-                existingStudents.FirstName = re.FirstName;
-                existingStudents.LastName = re.LastName;
-                //existingStudents.Address.PhysicalAddress = re.Address.PhysicalAddress;
-                //existingStudents.Address.PostalAddress = re.Address.PostalAddress;
-                existingStudents.DateOfBirth = re.DateOfBirth;
-                existingStudents.Email = re.Email;
-                existingStudents.Mobile = re.Mobile;
+                existingstudent.FirstName = re.FirstName;
+                existingstudent.LastName = re.LastName;
+                //existingstudent.Address.PhysicalAddress = re.Address.PhysicalAddress;
+                //existingstudent.Address.PostalAddress = re.Address.PostalAddress;
+                existingstudent.DateOfBirth = re.DateOfBirth;
+                existingstudent.Email = re.Email;
+                existingstudent.Mobile = re.Mobile;
 
                 await _context.SaveChangesAsync();
 
-                return existingStudents;
+                return existingstudent;
                 
                 
 
@@ -78,13 +78,13 @@ namespace StudentAdmin.Repository
 
 
 
-        public async Task<Students>DeleteStudent(Guid Id)
+        public async Task<student>DeleteStudent(Guid Id)
         {
 
-            var students  = await  GetStudentById(Id);
-            if (students  != null)
+            var student  = await  GetStudentById(Id);
+            if (student  != null)
             {
-               _context.Student.Remove(students);
+               _context.Student.Remove(student);
                 _context.SaveChanges();
             }
 
@@ -103,38 +103,46 @@ namespace StudentAdmin.Repository
 
 
 
-        //public async Task<Students> AddNewStudent(AddStudent request)
-        //{
-        //    // create student
-        //    var test = new Students();
-        //    {
-        //        test.Id = Guid.NewGuid();
-        //        test.FirstName = request.FirstName;
-        //        test.LastName = request.LastName;
-        //        test.DateOfBirth = request.DateOfBirth;
-        //        test.Email = request.Email;
-        //        test.Mobile = request.Mobile;
-        //        test.Address = request.Address;
+        public async Task<student> AddNewStudent(AddStudent request)
+        {
+            // create student
+            var mappingStudent = new student();
+            {
+                mappingStudent.Id = Guid.NewGuid();
+                mappingStudent.FirstName = request.FirstName;
+                mappingStudent.LastName = request.LastName;
+                mappingStudent.DateOfBirth = request.DateOfBirth;
+                mappingStudent.Email = request.Email;
+                mappingStudent.Mobile = request.Mobile;
+                mappingStudent.GenderId = request.GenderId;
+    
+                mappingStudent.Address = request.Address;
 
 
 
-        //    }
-     
+
+            }
+
+           
+
+             await _context.SaveChangesAsync();
+
+            return mappingStudent;
 
 
 
-        
-   
-        //    await _context.SaveChangesAsync();
 
 
 
-        //    return test;
- 
 
 
 
-        //}
+
+
+
+
+
+        }
 
     }
 }
