@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using StudentAdmin.DataModel;
+using StudentAdmin.Interfaces;
 using StudentAdmin.Repository;
 
 
@@ -34,6 +35,7 @@ builder.Services.AddDbContext<StudentAdminContext>(options =>
 
 
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IImageRepositiry, ImageRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

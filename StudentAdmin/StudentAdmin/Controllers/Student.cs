@@ -2,7 +2,7 @@
 using ICSharpCode.Decompiler.CSharp.Resolver;
 using Microsoft.AspNetCore.Mvc;
 using StudentAdmin.DataModel;
-
+using StudentAdmin.Interfaces;
 using StudentAdmin.Repository;
 
 namespace StudentAdmin.Controllers
@@ -12,10 +12,12 @@ namespace StudentAdmin.Controllers
     {
         private readonly IStudentRepository studentRepository;
         //private readonly IMapper mapper;
+        private readonly IImageRepositiry imageRepository;  
 
-        public Student(IStudentRepository studentRepository)
+        public Student(IStudentRepository studentRepository, IImageRepositiry imageRepositiry)
         {
             this.studentRepository = studentRepository;
+            this.imageRepository = imageRepositiry;
            // this.mapper = mapper;
         }
 
@@ -83,16 +85,42 @@ namespace StudentAdmin.Controllers
         }
 
         [HttpPost]
-        [Route("[controller]/Add")]
-        public async Task<IActionResult> AddStudetAsync([FromBody] AddStudent re)
+        [Route("[controller]/add")]
+   
+        public async Task<IActionResult> AddStudetAsync([FromBody] AddStudent test)
         {
-            var newStudent = await studentRepository.AddNewStudent(re);
+            var newStudent = await studentRepository.AddNewStudent(test);
             return Ok(newStudent);
 
 
 
         }
 
+        [HttpPost]
+        [Route("[controller]/{Id:guid}/upload-image")]
+
+        public async Task<IActionResult> UploadFile([FromRoute] Guid Id,IFormFile profileImage)
+        {
+            //check student exist 
+            if (await studentRepository.Exists(Id))
+            {   
+                // upload the image to local storage 
+                var fileName = Guid.NewGuid() + Path.GetExtension(profileImage.FileName);
+               var FileImagePath =  await imageRepository.Upload(profileImage, fileName);
+                // update the profile image path in the database
+               if(await studentRepository.UpdateProfilePicture(Id, FileImagePath))
+                {
+                    return Ok(FileImagePath);
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, "error uploding image");
+
+
+
+
+            }
+
+            return NotFound();
+            }
     }
 }
 

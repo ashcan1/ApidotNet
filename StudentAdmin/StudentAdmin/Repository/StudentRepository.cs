@@ -115,8 +115,9 @@ namespace StudentAdmin.Repository
                 mappingStudent.Email = request.Email;
                 mappingStudent.Mobile = request.Mobile;
                 mappingStudent.GenderId = request.GenderId;
-    
                 mappingStudent.Address = request.Address;
+
+
 
 
 
@@ -124,26 +125,30 @@ namespace StudentAdmin.Repository
             }
 
            
-
+             var newStudent = await _context.Student.AddAsync(mappingStudent);
              await _context.SaveChangesAsync();
 
-            return mappingStudent;
-
-
-
-
-
-
-
-
-
-
-
-
+            return newStudent.Entity;
 
 
         }
 
+        public async Task<bool> UpdateProfilePicture(Guid Id, string profileImageUrl)
+        {
+            var student = await GetStudentById(Id);
+            if (student != null)
+            {
+                student.ProfileImageUrl = profileImageUrl;  
+                await _context.SaveChangesAsync();
+                return true;
+                
+             
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
     

@@ -16,6 +16,8 @@ namespace StudentAdmin.Repository
 
         Task<student> AddNewStudent(AddStudent request);
 
+        Task<bool> UpdateProfilePicture(Guid Id, string profileImageUrl);
+
 
     }
 }
