@@ -117,19 +117,11 @@ namespace StudentAdmin.Repository
                 mappingStudent.GenderId = request.GenderId;
                 mappingStudent.Address = request.Address;
 
-
-
-
-
-
             }
 
-           
-             var newStudent = await _context.Student.AddAsync(mappingStudent);
-             await _context.SaveChangesAsync();
-
+            var newStudent = await _context.Student.AddAsync(mappingStudent);
+            await _context.SaveChangesAsync();
             return newStudent.Entity;
-
 
         }
 

@@ -1,4 +1,7 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using StudentAdmin.DataModel;
 using StudentAdmin.Interfaces;
@@ -11,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//Validate data assembly find all validated data from solution  
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(Program));
  
 
 builder.Services.AddDbContext<StudentAdminContext>(options =>
@@ -37,6 +43,8 @@ builder.Services.AddDbContext<StudentAdminContext>(options =>
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IImageRepositiry, ImageRepository>();
 
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -52,6 +60,11 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("AngularAppilication");
 app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath,"Sources")),
+    RequestPath = "/Sources"
+});
 
 app.UseAuthorization();
 
