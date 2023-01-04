@@ -14,8 +14,8 @@ namespace StudentAdmin.DataModel
         public string Email { get; set; }
         public long Mobile { get; set; }
         public Guid GenderId { get; set; }
-        public Address? PhysicalAddress { get; set; }
-        public Address? PostalAddress { get; set; }
+        public AdressStudentUpdate PhysicalAddress { get; set; }
+        public AdressStudentUpdate PostalAddress { get; set; }
 
     }
 }

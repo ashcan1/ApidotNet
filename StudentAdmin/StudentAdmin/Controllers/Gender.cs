@@ -18,7 +18,8 @@ namespace StudentAdmin.Controllers
 
         [HttpGet]
 
-        [Route("[controller]")]
+        [Route("/student/[controller]")]
+       
         public async Task <IActionResult> getAllGender()
         {
 

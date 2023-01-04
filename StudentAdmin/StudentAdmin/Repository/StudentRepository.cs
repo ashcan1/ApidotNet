@@ -56,8 +56,8 @@ namespace StudentAdmin.Repository
             {
                 existingstudent.FirstName = re.FirstName;
                 existingstudent.LastName = re.LastName;
-                //existingstudent.Address.PhysicalAddress = re.Address.PhysicalAddress;
-                //existingstudent.Address.PostalAddress = re.Address.PostalAddress;
+                existingstudent.Address.PhysicalAddress = re.PhysicalAddress.PhysicalAddress;
+                existingstudent.Address.PostalAddress = re.PostalAddress.PostalAddress;
                 existingstudent.DateOfBirth = re.DateOfBirth;
                 existingstudent.Email = re.Email;
                 existingstudent.Mobile = re.Mobile;
